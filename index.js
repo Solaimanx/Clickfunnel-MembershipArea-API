@@ -37,6 +37,15 @@ const addTag = require("./Tags");
 
 /// adding basic and pro tags
 app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
   const { name, email } = req.params;
 
   const data = new FormData();
@@ -88,6 +97,15 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
 
 /// adding 'english by the way ' tag
 app.get("/add-english-bytheway/:name/:email", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
   const { name, email } = req.params;
 
   const data = new FormData();
@@ -139,6 +157,15 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
 
 //send email
 app.get("/send-success-email/:name/:email/:password", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
   const { email, name, password } = req.params;
 
   const msg = {
