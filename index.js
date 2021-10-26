@@ -82,7 +82,7 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
         });
 
         const password = generator.generate({
-          length: 8,
+          length: 6,
           numbers: true,
         });
 
@@ -142,7 +142,7 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
         });
 
         const password = generator.generate({
-          length: 8,
+          length: 6,
           numbers: true,
         });
 
