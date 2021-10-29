@@ -38,7 +38,7 @@ const addTag = require("./Tags");
 
 /// adding basic and pro tags
 app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -98,7 +98,7 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
 
 /// adding 'english by the way ' tag
 app.get("/add-english-bytheway/:name/:email", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -158,7 +158,8 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
 
 //send email
 app.get("/send-success-email/:name/:email/:password", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
