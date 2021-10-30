@@ -119,6 +119,7 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
     method: 'post',
     url: 'https://www.english21days.co.il/thank-you1617910678849',
     headers: { 
+      "Content-Type": "application/x-www-form-urlencoded",
       'Cookie': '_etison_sessions_dcs_v2=7cbc9344ad4835ed32385e2e9fdf970c; __cf_bm=OCBO7w7ThqVRgbaFWU6dwoQf.ge0UpN_Mqt3rjBSu9g-1635610043-0-AUMtgj1lZN01H11G1N58XKQYWr6OVMk1zio7owBllg+txOOyttwblfNqUQtuLk56EckkABYK86qRbj6BxBS9EU+vyltk05F38PJlRu1xRjBI', 
       ...data.getHeaders()
     },
