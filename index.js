@@ -261,6 +261,18 @@ ${password}
   });
 });
 
+
+app.get('/password',  (req, res) => {
+  const password = generator.generate({
+    length: 6,
+    numbers: true,
+  });
+
+  return res.status(200).json({ password: password });
+})
+
+
+
 app.get("/", (req, res) => {
   res.send({
     server: "up and running",
