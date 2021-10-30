@@ -263,6 +263,18 @@ ${password}
 
 
 app.get('/password',  (req, res) => {
+
+  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
+
   const password = generator.generate({
     length: 6,
     numbers: true,

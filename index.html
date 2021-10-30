@@ -148,98 +148,55 @@ window.addEventListener('load',function(){
 }).then((res)=>{
   if(res.status == 200) {
     
-    document.querySelector("#myBar").style.width = '25%'
+fetch('url').then((response)=> response.json()).then((data)=> {
+  document.querySelector("#myBar").style.width = '25%'
 
-    ///get the password
+  var password = data.password
 
 
-    var Password = {
- 
- _pattern : /[a-zA-Z0-9]/,
- 
- 
- _getRandomByte : function()
- {
-   // http://caniuse.com/#feat=getrandomvalues
-   if(window.crypto && window.crypto.getRandomValues) 
-   {
-     var result = new Uint8Array(1);
-     window.crypto.getRandomValues(result);
-     return result[0];
-   }
-   else if(window.msCrypto && window.msCrypto.getRandomValues) 
-   {
-     var result = new Uint8Array(1);
-     window.msCrypto.getRandomValues(result);
-     return result[0];
-   }
-   else
-   {
-     return Math.floor(Math.random() * 256);
-   }
- },
- 
- generate : function(length)
- {
-   return Array.apply(null, {'length': length})
-     .map(function()
-     {
-       var result;
-       while(true) 
-       {
-         result = String.fromCharCode(this._getRandomByte());
-         if(this._pattern.test(result))
-         {
-           return result;
-         }
-       }        
-     }, this)
-     .join('');  
- }    
-   
+
+
+const paramsObj = {
+'member[email]': email,
+"member[password]": password,
+"member[password_confirmation]": password,
+"member[page_key]": "xoy7nhsch7g0292f",
+"member[page_id]": "33523349"
 };
-
-
-
-
-var newPassword = Password.generate(6)
-
-    const paramsObj = {
-  'member[email]': email,
-  "member[password]": newPassword,
-  "member[password_confirmation]": newPassword,
-  "member[page_key]": "xoy7nhsch7g0292f",
-  "member[page_id]": "33523349"
-  };
 const searchParams = new URLSearchParams(paramsObj);
-  const fetchData = searchParams.toString()
+const fetchData = searchParams.toString()
 fetch("https://www.english21days.co.il/members", {
-  "headers": {
-    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-    "accept-language": "en",
-    "cache-control": "max-age=0",
-    "content-type": "application/x-www-form-urlencoded",
-    "sec-ch-ua": "\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"macOS\"",
-    "sec-fetch-dest": "document",
-    "sec-fetch-mode": "navigate",
-    "sec-fetch-site": "same-origin",
-    "sec-fetch-user": "?1",
-    "upgrade-insecure-requests": "1"
-  },
-  "referrer": "https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&page_hash=42eccdbff95&login_redirect=1",
-  "referrerPolicy": "strict-origin-when-cross-origin",
-  "body": fetchData,
-  "method": "POST",
-  "mode": "cors",
-  "credentials": "include"
+"headers": {
+"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+"accept-language": "en",
+"cache-control": "max-age=0",
+"content-type": "application/x-www-form-urlencoded",
+"sec-ch-ua": "\"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+"sec-ch-ua-mobile": "?0",
+"sec-ch-ua-platform": "\"macOS\"",
+"sec-fetch-dest": "document",
+"sec-fetch-mode": "navigate",
+"sec-fetch-site": "same-origin",
+"sec-fetch-user": "?1",
+"upgrade-insecure-requests": "1"
+},
+"referrer": "https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&page_hash=42eccdbff95&login_redirect=1",
+"referrerPolicy": "strict-origin-when-cross-origin",
+"body": fetchData,
+"method": "POST",
+"mode": "cors",
+"credentials": "include"
 }).then((res)=>{
-  if(res.status == 200){
+if(res.status == 200){
+
+
+
+
+
 document.querySelector("#myBar").style.width = '50%'
-    const url = res.url
-    if(url == 'https://www.english21days.co.il/course33523349'){
-  const emailUrl = 'https://clickfunnel-membership-area-api.vercel.app/send-success-email/' + name + '/' + email + '/' + newPassword
+const url = res.url
+if(url == 'https://www.english21days.co.il/course33523349'){
+const emailUrl = 'https://clickfunnel-membership-area-api.vercel.app/send-success-email/' + name + '/' + email + '/' + password
 fetch(emailUrl).then((res)=> res.json())
 .then((result)=>{
 if(result.message == 'success'){
@@ -255,20 +212,36 @@ alert('אופס.. חלה תקלה בשליחת מייל פרטי גישה. אנ�
 console.log(error)
 alert('אופס.. חלה תקלה בשליחת מייל פרטי גישה. אנא צור עימנו קשר בהקדם')
 })
-        }else{
+    }else{
 document.querySelector("#myBar").style.width = '85%'
 document.querySelector("#myBar").style.width = '100%'
 const redirect  = 'https://www.english21days.co.il/course33523349'
 window.location.href = redirect
 }
-  }
+}
 }
 ).catch((error)=>{
 console.log(error)
 });
 
 
-    
+
+
+
+
+
+
+
+}).catch((error)=>{
+  console.log(error)
+  window.location.reload()
+})
+
+
+
+
+
+
 
 
 
@@ -276,9 +249,16 @@ console.log(error)
     console.log('failed to add tags ')
 
   }
+
+
+
 }).catch((error)=>{
   console.log(error)
 })
+
+
+
+
 
 
 })
