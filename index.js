@@ -107,6 +107,8 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
     "Access-Control-Allow-Headers",
     "X-Requested-With,Content-Type, Authorization,Accept"
   );
+
+
   const { name, email } = req.params;
 
   const data = new FormData();
@@ -114,16 +116,17 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
   data.append("contact[name]", name);
 
   const config = {
-    method: "post",
-    url: "https://www.english21days.co.il/thank-you1617910678849",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Cookie:
-        "_etison_sessions_dcs_v2=41e4b98a60b0d4ee7d47b6a86a0aad25; __cf_bm=_MzxvdM_pSGgGw9Zi2G9SZ1CTfhgl5qxndlWIB0qctE-1634593250-0-AbRzc1pcchHsr+BYoaUpXYRMxdmPMPkeytjpj2LjOO0ar7DxWgtKHpvLTeh7Xn2tvLoHdDE6MDHGUeEfvKK7LAaajGefPe/ov7OY9go0od3g",
-      ...data.getHeaders(),
+    method: 'post',
+    url: 'https://www.english21days.co.il/thank-you1617910678849',
+    headers: { 
+      'Cookie': '_etison_sessions_dcs_v2=7cbc9344ad4835ed32385e2e9fdf970c; __cf_bm=OCBO7w7ThqVRgbaFWU6dwoQf.ge0UpN_Mqt3rjBSu9g-1635610043-0-AUMtgj1lZN01H11G1N58XKQYWr6OVMk1zio7owBllg+txOOyttwblfNqUQtuLk56EckkABYK86qRbj6BxBS9EU+vyltk05F38PJlRu1xRjBI', 
+      ...data.getHeaders()
     },
-    data: data,
+    data : data
   };
+  
+
+
 
   axios(config)
     .then(function (response) {
