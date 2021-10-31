@@ -97,7 +97,7 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
 });
 
 /// adding 'english by the way ' tag
-app.get("œ/:name/:email", (req, res) => {
+app.get("/add-english-bytheway/:name/:email", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
   res.setHeader(
     "Access-Control-Allow-Methods",
