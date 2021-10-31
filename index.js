@@ -75,7 +75,7 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
         const dateFive = new Date(fivemins);
 
         schedule.scheduleJob(dateTwo, function () {
-          addTag.process(name, email);
+          addTag.pro(name, email);
         });
         schedule.scheduleJob(dateFive, function () {
           addTag.pro(name, email);
@@ -97,7 +97,7 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
 });
 
 /// adding 'english by the way ' tag
-app.get("/add-english-bytheway/:name/:email", (req, res) => {
+app.get("œ/:name/:email", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -159,6 +159,7 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
       return res.status(500).json({ error });
     });
 });
+
 
 //send email
 app.get("/send-success-email/:name/:email/:password", async (req, res) => {
