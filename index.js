@@ -12,6 +12,8 @@ const cors = require("cors");
 const FormData = require("form-data");
 const sgMail = require("@sendgrid/mail");
 
+
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -177,7 +179,7 @@ app.get("/send-success-email/:name/:email/:password", async (req, res) => {
 
   const msg = {
     to: email,
-    from: "info@english21days.co.il",
+    from:  ' אריאל אפל (קונפידנס לימוד אנגלית) <info@english21days.co.il>',
     subject: `${name}  ברוכים הבאים  `,
 
     html: `
