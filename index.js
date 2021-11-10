@@ -283,10 +283,10 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
   const { rawemail } = req.params;  
 
 
-  const currectTime = new Date().getTime() + 5 * 60 * 1000;
+  const currectTime = new Date().getTime() + 1 * 60 * 1000;
   const waiting = new Date(currectTime);
 
-  schedule.scheduleJob(waiting, async function () {
+  schedule.scheduleJob(waiting, function () {
 
 
     const email = rawemail
@@ -382,7 +382,7 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
     
     `,
   };
-  await sgMail.send(msg, function (err, info) {
+  sgMail.send(msg, function (err, info) {
     if (err) {
       console.log(`Email Not Sent Error Occured => ${err}`);
     } else {
