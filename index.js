@@ -266,7 +266,7 @@ ${password}
 
 
 //send email 2nd time after waiting 15 mins
-app.get("/forgot-password/:email", async (req, res) => {
+app.get("/forgot-password/:rawemail", async (req, res) => {
 
 
   res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
@@ -280,7 +280,7 @@ app.get("/forgot-password/:email", async (req, res) => {
     "X-Requested-With,Content-Type, Authorization,Accept"
   );
 
-  const { rawEmail } = req.params;  
+  const { rawemail } = req.params;  
 
 
   const currectTime = new Date().getTime() + 5 * 60 * 1000;
@@ -289,7 +289,7 @@ app.get("/forgot-password/:email", async (req, res) => {
   schedule.scheduleJob(waiting, async function () {
 
 
-    const email = rawEmail
+    const email = rawemail
 
   const msg = {
     to: email,
