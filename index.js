@@ -280,15 +280,16 @@ app.get("/forgot-password/:email", async (req, res) => {
     "X-Requested-With,Content-Type, Authorization,Accept"
   );
 
-  const { email } = req.params;  
+  const { rawEmail } = req.params;  
 
 
-  const currectTime = new Date().getTime() + 15 * 60 * 1000;
+  const currectTime = new Date().getTime() + 5 * 60 * 1000;
   const waiting = new Date(currectTime);
 
   schedule.scheduleJob(waiting, async function () {
 
 
+    const email = rawEmail
 
   const msg = {
     to: email,
