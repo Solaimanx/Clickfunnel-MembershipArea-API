@@ -12,8 +12,6 @@ const cors = require("cors");
 const FormData = require("form-data");
 const sgMail = require("@sendgrid/mail");
 
-
-
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -38,9 +36,20 @@ app.use(cors(corsOptions));
 sgMail.setApiKey(process.env.SENDGRID_API);
 const addTag = require("./Tags");
 
+
+app.get("/", (req, res) => {
+  res.send({
+    server: "up and running",
+  });
+});
+
+
 /// adding basic and pro tags
 app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://www.english21days.co.il"
+  );
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -100,7 +109,10 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
 
 /// adding 'english by the way ' tag
 app.get("/add-english-bytheway/:name/:email", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://www.english21days.co.il"
+  );
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -110,7 +122,6 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
     "X-Requested-With,Content-Type, Authorization,Accept"
   );
 
-
   const { name, email } = req.params;
 
   const data = new FormData();
@@ -118,18 +129,16 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
   data.append("contact[name]", name);
 
   const config = {
-    method: 'post',
-    url: 'https://www.english21days.co.il/thank-you1617910678849',
-    headers: { 
+    method: "post",
+    url: "https://www.english21days.co.il/thank-you1617910678849",
+    headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      'Cookie': '_etison_sessions_dcs_v2=7cbc9344ad4835ed32385e2e9fdf970c; __cf_bm=OCBO7w7ThqVRgbaFWU6dwoQf.ge0UpN_Mqt3rjBSu9g-1635610043-0-AUMtgj1lZN01H11G1N58XKQYWr6OVMk1zio7owBllg+txOOyttwblfNqUQtuLk56EckkABYK86qRbj6BxBS9EU+vyltk05F38PJlRu1xRjBI', 
-      ...data.getHeaders()
+      Cookie:
+        "_etison_sessions_dcs_v2=7cbc9344ad4835ed32385e2e9fdf970c; __cf_bm=OCBO7w7ThqVRgbaFWU6dwoQf.ge0UpN_Mqt3rjBSu9g-1635610043-0-AUMtgj1lZN01H11G1N58XKQYWr6OVMk1zio7owBllg+txOOyttwblfNqUQtuLk56EckkABYK86qRbj6BxBS9EU+vyltk05F38PJlRu1xRjBI",
+      ...data.getHeaders(),
     },
-    data : data
+    data: data,
   };
-  
-
-
 
   axios(config)
     .then(function (response) {
@@ -162,10 +171,12 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
     });
 });
 
-
 //send email
 app.get("/send-success-email/:name/:email/:password", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://www.english21days.co.il"
+  );
 
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -177,9 +188,13 @@ app.get("/send-success-email/:name/:email/:password", async (req, res) => {
   );
   const { email, name, password } = req.params;
 
+  const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`
+
+
+
   const msg = {
     to: email,
-    from:  ' אריאל אפל (קונפידנס לימוד אנגלית) <info@english21days.co.il>',
+    from: " אריאל אפל (קונפידנס לימוד אנגלית) <info@english21days.co.il>",
     subject: `${name}  ברוכים הבאים  `,
 
     html: `
@@ -195,20 +210,14 @@ app.get("/send-success-email/:name/:email/:password", async (req, res) => {
 <br />
 <br />
 
-להלן הוראות גישה לתוכנית:
+
+לגישה מיידית לתוכנית <a href='${link}'>היכנס לכאן</a> ולחץ על הכפתור בתחתית הדף.
+
+
 <br />
 <br />
 
-
-נכנסים לעמוד הכניסה:
-<br />
-<br />
-
-<a href="https://www.english21days.co.il/course33523349">https://www.english21days.co.il/course33523349</a>
-<br />
-<br />
-
-שם משתמש:
+שים לב:
 <br />
 <br />
 
@@ -264,12 +273,12 @@ ${password}
   });
 });
 
-
 //send email 2nd time after waiting 15 mins
 app.get("/forgot-password/:rawemail", async (req, res) => {
-
-
-  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://www.english21days.co.il"
+  );
 
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -280,23 +289,20 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
     "X-Requested-With,Content-Type, Authorization,Accept"
   );
 
-  const { rawemail } = req.params;  
-
+  const { rawemail } = req.params;
 
   const currectTime = new Date().getTime() + 1 * 60 * 1000;
   const waiting = new Date(currectTime);
 
-  schedule.scheduleJob(waiting, function () {
+  schedule.scheduleJob(waiting, async function () {
+    const email = rawemail;
 
+    const msg = {
+      to: email,
+      from: " אריאל אפל (קונפידנס לימוד אנגלית) <info@english21days.co.il>",
+      subject: `פרטי הגישה שלך `,
 
-    const email = rawemail
-
-  const msg = {
-    to: email,
-    from:  ' אריאל אפל (קונפידנס לימוד אנגלית) <info@english21days.co.il>',
-    subject: `פרטי הגישה שלך `,
-
-    html: `
+      html: `
     <table style="  direction:rtl ; text-align:right ; width:100%;border-spacing:0px;border-collapse:collapse;border-width:medium;border-style:none" role="presentation">
                                   <tbody>
                                     <tr>
@@ -344,34 +350,6 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
                                         <div>
                                           <div style="font-size:16px">
                                             <div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
-                                              <div>&nbsp;</div>
                                             </div>
                                           </div>
                                         </div>
@@ -381,42 +359,26 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
                                 </table>
     
     `,
-  };
-  sgMail.send(msg, function (err, info) {
-    if (err) {
-      console.log(`Email Not Sent Error Occured => ${err}`);
-    } else {
-      console.log(`Email was Sent`);
-    }
-  });
-
-
-
-
-
-
-
+    };
+    await sgMail.send(msg, function (err, info) {
+      if (err) {
+        console.log(`Email Not Sent Error Occured => ${err}`);
+      } else {
+        console.log(`Email was Sent`);
+      }
+    });
 
     
   });
 
   return res.status(200).json({ message: "success" });
-
-
-
-
-
-
 });
 
-
-
-
-
-
-app.get('/password',  (req, res) => {
-
-  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+app.get("/password", (req, res) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://www.english21days.co.il"
+  );
 
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -433,15 +395,18 @@ app.get('/password',  (req, res) => {
   });
 
   return res.status(200).json({ password: password });
+});
+
+
+
+
+app.post("/refund",(req, res)=>{
+
+
+  
 })
 
 
-
-app.get("/", (req, res) => {
-  res.send({
-    server: "up and running",
-  });
-});
 
 
 
@@ -450,4 +415,3 @@ app.get("/", (req, res) => {
 app.listen(process.env.PORT, function () {
   console.log(`server is running ${process.env.PORT}`);
 });
-
