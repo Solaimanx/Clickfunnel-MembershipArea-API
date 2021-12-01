@@ -36,13 +36,11 @@ app.use(cors(corsOptions));
 sgMail.setApiKey(process.env.SENDGRID_API);
 const addTag = require("./Tags");
 
-
 app.get("/", (req, res) => {
   res.send({
     server: "up and running",
   });
 });
-
 
 /// adding basic and pro tags
 app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
@@ -188,9 +186,7 @@ app.get("/send-success-email/:name/:email/:password", async (req, res) => {
   );
   const { email, name, password } = req.params;
 
-  const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`
-
-
+  const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`;
 
   const msg = {
     to: email,
@@ -210,14 +206,18 @@ app.get("/send-success-email/:name/:email/:password", async (req, res) => {
 <br />
 <br />
 
-
-לגישה מיידית לתוכנית <a href='${link}'>היכנס לכאן</a> ולחץ על הכפתור בתחתית הדף.
+<b>לגישה מיידית לתוכנית <a href='${link}'>היכנס לכאן</a> ולחץ על הכפתור בתחתית הדף.</b>
 
 
 <br />
 <br />
 
-שים לב:
+<b>שים לב:</b>
+
+<br />
+<br />
+במידה ושם המשתמש והסיסמא לא מופיעים באופן אוטומטי, להלן הפרטים:
+
 <br />
 <br />
 
@@ -367,8 +367,6 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
         console.log(`Email was Sent`);
       }
     });
-
-    
   });
 
   return res.status(200).json({ message: "success" });
@@ -397,20 +395,7 @@ app.get("/password", (req, res) => {
   return res.status(200).json({ password: password });
 });
 
-
-
-
-app.post("/refund",(req, res)=>{
-
-
-  
-})
-
-
-
-
-
-
+app.post("/refund", (req, res) => {});
 
 app.listen(process.env.PORT, function () {
   console.log(`server is running ${process.env.PORT}`);
