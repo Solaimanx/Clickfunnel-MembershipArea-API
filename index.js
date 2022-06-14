@@ -44,18 +44,9 @@ app.get("/", (req, res) => {
 
 /// adding basic and pro tags
 app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Authorization,Accept");
   const { name, email } = req.params;
 
   const data = new FormData();
@@ -107,18 +98,9 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
 
 /// adding 'english by the way ' tag
 app.get("/add-english-bytheway/:name/:email", (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Authorization,Accept");
 
   const { name, email } = req.params;
 
@@ -171,56 +153,36 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
 
 //send email
 app.get("/send-success-email/:name/:email/:password", async (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
 
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Authorization,Accept");
   const { email, name, password } = req.params;
 
   const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`;
 
   const msg = {
     to: email,
-    from: " אריאל אפל (קונפידנס לימוד אנגלית) <info@english21days.co.il>",
+    from: " אסף (FLOW פשוט לדבר אנגלית) <info@english21days.co.il>",
     subject: `${name}  ברוכים הבאים  `,
 
     html: `
     <div style=" direction:rtl ; text-align:right">
-
     הי ${name} !
-
     <br />
     <br />
-
 ברוכים הבאים לתוכנית :-)
-
 <br />
 <br />
-
 <b>לגישה מיידית לתוכנית <a href='${link}'>היכנס לכאן</a> ולחץ על הכפתור בתחתית הדף.</b>
-
-
 <br />
 <br />
-
 <b>שים לב:</b>
-
 <br />
 <br />
 במידה ושם המשתמש והסיסמא לא מופיעים באופן אוטומטי, להלן הפרטים:
-
 <br />
 <br />
-
 ${email}
 <br />
 <br />
@@ -230,35 +192,23 @@ ${email}
 ${password}
 <br />
 <br />
-
-
  כדאי לשמור את הפרטים האלה במקום שיהיה לך קל למצוא
 <br />
 <br />
-
-
-
 שיהיה לך המון בהצלחה!!
 <br />
-
 <br />
-
-
 בברכה,
 <br />
-אריאל
+אסף
 <br />
 --
 <br />
 <br />
-
-קונפידנס
-לדבר אנגלית, לא לגמגם
-
+FLOW
+פשוט לדבר אנגלית
 <br />
-
 <div>
-
     `,
   };
 
@@ -275,19 +225,10 @@ ${password}
 
 //send email 2nd time after waiting 15 mins
 app.get("/forgot-password/:rawemail", async (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
 
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Authorization,Accept");
 
   const { rawemail } = req.params;
 
@@ -305,61 +246,62 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
       html: `
     <table style="  direction:rtl ; text-align:right ; width:100%;border-spacing:0px;border-collapse:collapse;border-width:medium;border-style:none" role="presentation">
                                   <tbody>
-                                    <tr>
-                                      <td style="padding:0px;width:100%" width="100%" valign="top">
+                                  <tr>
+                                  <td style="padding:0px;width:100%" width="100%" valign="top">
+                                    <div>
+                                      <div style="font-size:16px">
                                         <div>
-                                          <div style="font-size:16px">
-                                            <div>
-                                              <div>הי!</div>
-                                              <div><br>
-                                                לאחרונה ביקשת לשנות
-                                                סיסמא לחשבונך.<br>
-                                                <br>
-                                                במידה וכבר שינית את
-                                                הסיסמא, <br>
-                                                פשוט תיכנס מכאן עם המייל
-                                                והסיסמא שיצרת:<br>
-                                                <a href="https://www.english21days.co.il/course33523349" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.english21days.co.il/course33523349&amp;source=gmail&amp;ust=1636575999458000&amp;usg=AFQjCNEF7xl87vTFe_um9yW-jR9TvcS_Vg">https://www.english21days.co.<wbr>il/course33523349</a><br>
-                                                (כדאי לשמור את הקישור
-                                                הזה במועדפים שיהיה לך קל
-                                                למצוא)<br>
-                                                <br>
-                                                במידה ועדיין לא שינית את
-                                                הסיסמא,<br>
-                                                ניתן לעשות זאת <a href="https://www.english21days.co.il/thank-you-basic-plankz1yvwq9" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.english21days.co.il/thank-you-basic-plankz1yvwq9&amp;source=gmail&amp;ust=1636575999458000&amp;usg=AFQjCNF3Ig2WYhHdQCSwVc63BWr3xE7OeA">מכאן</a>.<br>
-                                              </div>
-                                              <div><br>
-                                              </div>
-                                              <div><br>
-                                                מאחל לך לימוד נעים
-                                                ומהנה,<br>
-                                                אריאל</div>
-                                              <div>&nbsp;</div>
-                                            </div>
+                                          <div>הי!</div>
+                                          <div><br>
+                                            לאחרונה ביקשת לשנות
+                                            סיסמא לחשבונך.<br>
+                                            <br>
+                                            במידה וכבר שינית את
+                                            הסיסמא, <br>
+                                            פשוט תיכנס מכאן עם המייל
+                                            והסיסמא שיצרת:<br>
+                                            <a href="https://www.english21days.co.il/course33523349" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.english21days.co.il/course33523349&amp;source=gmail&amp;ust=1636575999458000&amp;usg=AFQjCNEF7xl87vTFe_um9yW-jR9TvcS_Vg">https://www.english21days.co.<wbr>il/course33523349</a><br>
+                                            (כדאי לשמור את הקישור
+                                            הזה במועדפים שיהיה לך קל
+                                            למצוא)<br>
+                                            <br>
+                                            במידה ועדיין לא שינית את
+                                            הסיסמא,<br>
+                                            ניתן לעשות זאת <a href="https://www.english21days.co.il/thank-you-basic-plankz1yvwq9" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.english21days.co.il/thank-you-basic-plankz1yvwq9&amp;source=gmail&amp;ust=1636575999458000&amp;usg=AFQjCNF3Ig2WYhHdQCSwVc63BWr3xE7OeA">מכאן</a>.<br>
                                           </div>
+                                          <div><br>
+                                          </div>
+                                          <div><br>
+                                            מאחל לך לימוד נעים
+                                            ומהנה,<br>
+                                            אסף</div>
+                                          <div>&nbsp;</div>
                                         </div>
-                                        <div><span>
-                                            <table style="float:none;text-align:right;border-spacing:0px;border-collapse:collapse;border-width:medium;border-style:none" role="presentation" width="100%" align="right">
-                                              <tbody>
-                                                <tr>
-                                                  <td style="padding:0px 0px 0px 0px" align="right"> <img src="https://ci6.googleusercontent.com/proxy/NFq5F8FXTyJM6yeepc3Yca4Wo9kAasjJH5cknq06Iay5PluCdAi795i2M8R2oazXeMZqekoKLOcOkORHaj7eedPPJUVIvc4AolyJdgerYxFbZkcZwd6sCUmMn_MQ_n_r8mWa52APVI_YWSoXCWDyArOoQijTwf59yQ=s0-d-e1-ft#https://hostedimages-cdn.aweber-static.com/MTAyNTkyMA==/thumbnail/697ac1bb04e54e1f87d58b5e3a11c7b4.png" style="display:block;width:136px;height:150px;max-width:100%" alt="" width="136" height="150" class="CToWUd"> </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </span></div>
+                                      </div>
+                                    </div>
+                                    <div><span>
+                                        <table style="float:none;text-align:right;border-spacing:0px;border-collapse:collapse;border-width:medium;border-style:none" role="presentation" width="100%" align="right">
+                                          <tbody>
+                                            <tr>
+                                              <td style="padding:0px 0px 0px 0px" align="right"> <img src="https://ci6.googleusercontent.com/proxy/NFq5F8FXTyJM6yeepc3Yca4Wo9kAasjJH5cknq06Iay5PluCdAi795i2M8R2oazXeMZqekoKLOcOkORHaj7eedPPJUVIvc4AolyJdgerYxFbZkcZwd6sCUmMn_MQ_n_r8mWa52APVI_YWSoXCWDyArOoQijTwf59yQ=s0-d-e1-ft#https://hostedimages-cdn.aweber-static.com/MTAyNTkyMA==/thumbnail/697ac1bb04e54e1f87d58b5e3a11c7b4.png" style="display:block;width:136px;height:150px;max-width:100%" alt="" width="136" height="150" class="CToWUd"> </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </span></div>
+                                    <div>
+                                      <div style="font-size:16px">
                                         <div>
-                                          <div style="font-size:16px">
-                                            <div>
-                                            </div>
-                                          </div>
                                         </div>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
     
     `,
     };
+
     await sgMail.send(msg, function (err, info) {
       if (err) {
         console.log(`Email Not Sent Error Occured => ${err}`);
@@ -373,19 +315,10 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
 });
 
 app.get("/password", (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
 
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Authorization,Accept");
 
   const password = generator.generate({
     length: 6,
