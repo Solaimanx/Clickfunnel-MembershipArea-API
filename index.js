@@ -44,9 +44,18 @@ app.get("/", (req, res) => {
 
 /// adding basic and pro tags
 app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Authorization,Accept");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://www.english21days.co.il"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
   const { name, email } = req.params;
 
   const data = new FormData();
@@ -98,9 +107,18 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
 
 /// adding 'english by the way ' tag
 app.get("/add-english-bytheway/:name/:email", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Authorization,Accept");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://www.english21days.co.il"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
 
   const { name, email } = req.params;
 
@@ -153,10 +171,19 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
 
 //send email
 app.get("/send-success-email/:name/:email/:password", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://www.english21days.co.il"
+  );
 
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Authorization,Accept");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
   const { email, name, password } = req.params;
 
   const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`;
@@ -225,10 +252,19 @@ FLOW
 
 //send email 2nd time after waiting 15 mins
 app.get("/forgot-password/:rawemail", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://www.english21days.co.il"
+  );
 
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Authorization,Accept");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
 
   const { rawemail } = req.params;
 
@@ -240,7 +276,7 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
 
     const msg = {
       to: email,
-      from: " אריאל אפל (קונפידנס לימוד אנגלית) <info@english21days.co.il>",
+      from: " אסף (FLOW פשוט לדבר אנגלית) <info@english21days.co.il>",
       subject: `פרטי הגישה שלך `,
 
       html: `
@@ -283,7 +319,7 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
                                         <table style="float:none;text-align:right;border-spacing:0px;border-collapse:collapse;border-width:medium;border-style:none" role="presentation" width="100%" align="right">
                                           <tbody>
                                             <tr>
-                                              <td style="padding:0px 0px 0px 0px" align="right"> <img src="https://ci6.googleusercontent.com/proxy/NFq5F8FXTyJM6yeepc3Yca4Wo9kAasjJH5cknq06Iay5PluCdAi795i2M8R2oazXeMZqekoKLOcOkORHaj7eedPPJUVIvc4AolyJdgerYxFbZkcZwd6sCUmMn_MQ_n_r8mWa52APVI_YWSoXCWDyArOoQijTwf59yQ=s0-d-e1-ft#https://hostedimages-cdn.aweber-static.com/MTAyNTkyMA==/thumbnail/697ac1bb04e54e1f87d58b5e3a11c7b4.png" style="display:block;width:136px;height:150px;max-width:100%" alt="" width="136" height="150" class="CToWUd"> </td>
+                                              <td style="padding:0px 0px 0px 0px" align="right"> <img src="https://images.clickfunnels.com/b3/76412fd32440a6b709eb54a031921d/assaf-s.png" style="display:block;width:136px;height:150px;max-width:100%" alt="" width="136" height="150" class="CToWUd"> </td>
                                             </tr>
                                           </tbody>
                                         </table>
@@ -315,10 +351,19 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
 });
 
 app.get("/password", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://www.english21days.co.il");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://www.english21days.co.il"
+  );
 
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Authorization,Accept");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
 
   const password = generator.generate({
     length: 6,
