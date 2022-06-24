@@ -276,7 +276,7 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
 
     const msg = {
       to: email,
-      from: " אסף (FLOW פשוט לדבר אנגלית) <info@english21days.co.il>",
+      from: " אסף (פלואו לימוד אנגלית)  <info@english21days.co.il>",
       subject: `פרטי הגישה שלך `,
 
       html: `
