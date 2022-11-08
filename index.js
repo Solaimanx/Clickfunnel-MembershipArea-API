@@ -194,7 +194,8 @@ app.get("/send-success-email/:name/:email/:password", async (req, res) => {
   axios(config)
     .then((res) => res.json())
     .then((json) => {
-      console.log(json);
+      console.log('success',json);
+
     })
     .catch((error) => {
       console.log(error);
