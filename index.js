@@ -35,6 +35,7 @@ app.use(cors(corsOptions));
 
 sgMail.setApiKey(process.env.SENDGRID_API);
 const addTag = require("./Tags");
+const { SaveNewUser } = require("./utils");
 
 app.get("/", (req, res) => {
   res.send({
@@ -185,6 +186,17 @@ app.get("/send-success-email/:name/:email/:password", async (req, res) => {
     "X-Requested-With,Content-Type, Authorization,Accept"
   );
   const { email, name, password } = req.params;
+
+  try {
+    const isSaved = await SaveNewUser({
+      name,
+      email,
+      password,
+    });
+    console.log(isSaved);
+  } catch (error) {
+    console.log(error);
+  }
 
   const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`;
 
