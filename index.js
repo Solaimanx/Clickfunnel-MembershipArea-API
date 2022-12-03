@@ -265,6 +265,108 @@ FLOW
   });
 });
 
+
+
+//send email
+app.get("/send-success-email-thanks/:name/:email/:password", async (req, res) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://www.english21days.co.il"
+  );
+
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
+  const { email, name, password } = req.params;
+
+  const config = {
+    method: "get",
+    url: `https://clickfunnel-progress-tracker.vercel.app/new-user/${name}/${email}/${password}`,
+  };
+
+  axios(config)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log('success',json);
+
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`;
+
+  const msg = {
+    to: email,
+    from: " אסף (FLOW פשוט לדבר אנגלית) <info@english21days.co.il>",
+    subject: `${name}  ברוכים הבאים  `,
+
+    html: `
+    <div style=" direction:rtl ; text-align:right">
+    הי ${name} !
+    <br />
+    <br />
+    ברוכים הבאים ל 5000 המילים :-)
+<br />
+<br />
+<b> מיידית לתוכנית <a href='${link}'>היכנס לכאן</a> ולחץ על הכפתור בתחתית הדף.</b>
+<br />
+<br />
+<b>שים לב:</b>
+<br />
+<br />
+במידה ושם המשתמש והסיסמא לא מופיעים באופן אוטומטי, להלן הפרטים:
+<br />
+<br />
+${email}
+<br />
+<br />
+סיסמה:
+<br />
+<br />
+${password}
+<br />
+<br />
+ כדאי לשמור את הפרטים האלה במקום שיהיה לך קל למצוא
+<br />
+<br />
+שיהיה לך המון בהצלחה!!
+<br />
+<br />
+בברכה,
+<br />
+אסף
+<br />
+--
+<br />
+<br />
+FLOW
+פשוט לדבר אנגלית
+<br />
+<div>
+    `,
+  };
+
+  await sgMail.send(msg, function (err, info) {
+    if (err) {
+      console.log(`Email Not Sent Error Occured => ${err}`);
+      return res.status(422).json({ err });
+    } else {
+      console.log(`Email was Sent`);
+      return res.status(200).json({ message: "success" });
+    }
+  });
+});
+
+
+
+
+
 //send email 2nd time after waiting 15 mins
 app.get("/forgot-password/:rawemail", async (req, res) => {
   res.setHeader(
