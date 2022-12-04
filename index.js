@@ -314,7 +314,7 @@ app.get("/send-success-email-thanks/:name/:email/:password", async (req, res) =>
     ברוכים הבאים ל 5000 המילים :-)
 <br />
 <br />
-<b> מיידית לתוכנית <a href='${link}'>היכנס לכאן</a> ולחץ על הכפתור בתחתית הדף.</b>
+<b> לגישה מיידית <a href='${link}'>היכנס לכאן</a> ולחץ על הכפתור בתחתית הדף.</b>
 <br />
 <br />
 <b>שים לב:</b>
