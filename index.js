@@ -57,6 +57,7 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
     "X-Requested-With,Content-Type, Authorization,Accept"
   );
   const { name, email } = req.params;
+  console.log(name)
 
   const data = new FormData();
   data.append("contact[email]", email);
@@ -121,6 +122,9 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
   );
 
   const { name, email } = req.params;
+  console.log(name)
+
+
 
   const data = new FormData();
   data.append("contact[email]", email);
@@ -185,6 +189,9 @@ app.get("/send-success-email/:name/:email/:password", async (req, res) => {
     "X-Requested-With,Content-Type, Authorization,Accept"
   );
   const { email, name, password } = req.params;
+
+  console.log(name)
+
 
   // const config = {
   //   method: "get",
@@ -283,6 +290,8 @@ app.get("/send-success-email-thanks/:name/:email/:password", async (req, res) =>
     "X-Requested-With,Content-Type, Authorization,Accept"
   );
   const { email, name, password } = req.params;
+
+  console.log(name)
 
   // const config = {
   //   method: "get",
