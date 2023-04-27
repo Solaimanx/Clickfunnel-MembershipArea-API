@@ -284,20 +284,20 @@ app.get("/send-success-email-thanks/:name/:email/:password", async (req, res) =>
   );
   const { email, name, password } = req.params;
 
-  const config = {
-    method: "get",
-    url: `https://clickfunnel-progress-tracker.vercel.app/new-user/${name}/${email}/${password}`,
-  };
+  // const config = {
+  //   method: "get",
+  //   url: `https://clickfunnel-progress-tracker.vercel.app/new-user/${name}/${email}/${password}`,
+  // };
 
-  axios(config)
-    .then((res) => res.json())
-    .then((json) => {
-      console.log('success',json);
+  // axios(config)
+  //   .then((res) => res.json())
+  //   .then((json) => {
+  //     console.log('success',json);
 
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 
   const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`;
 
