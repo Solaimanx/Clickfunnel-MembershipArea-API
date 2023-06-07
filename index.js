@@ -39,7 +39,7 @@ const addTag = require("./Tags");
 app.get("/", (req, res) => {
   res.send({
     server: "up and running",
-    note : 'working'
+    note: "working",
   });
 });
 
@@ -58,7 +58,7 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
     "X-Requested-With,Content-Type, Authorization,Accept"
   );
   const { name, email } = req.params;
-  console.log(name)
+  console.log(name);
 
   const data = new FormData();
   data.append("contact[email]", email);
@@ -122,7 +122,7 @@ app.get("/add-basic-pro-smalltalk/:name/:email", async (req, res, next) => {
     "X-Requested-With,Content-Type, Authorization,Accept"
   );
   const { name, email } = req.params;
-  console.log(name)
+  console.log(name);
 
   const data = new FormData();
   data.append("contact[email]", email);
@@ -141,8 +141,9 @@ app.get("/add-basic-pro-smalltalk/:name/:email", async (req, res, next) => {
   };
 
   axios(config)
-    .then(function (response) {
+    .then(async function (response) {
       if (response.status == 200) {
+        await addTag.smallTalk(name, email);
         const twomins = new Date().getTime() + 2 * 60 * 1000;
         const dateTwo = new Date(twomins);
 
@@ -173,8 +174,6 @@ app.get("/add-basic-pro-smalltalk/:name/:email", async (req, res, next) => {
     });
 });
 
-
-
 /// adding 'english by the way ' tag
 app.get("/add-english-bytheway/:name/:email", (req, res) => {
   res.setHeader(
@@ -191,9 +190,7 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
   );
 
   const { name, email } = req.params;
-  console.log(name)
-
-
+  console.log(name);
 
   const data = new FormData();
   data.append("contact[email]", email);
@@ -259,8 +256,7 @@ app.get("/send-success-email/:name/:email/:password", async (req, res) => {
   );
   const { email, name, password } = req.params;
 
-  console.log(name)
-
+  console.log(name);
 
   // const config = {
   //   method: "get",
@@ -341,50 +337,50 @@ FLOW
   });
 });
 
-
-
 //send email
-app.get("/send-success-email-thanks/:name/:email/:password", async (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
+app.get(
+  "/send-success-email-thanks/:name/:email/:password",
+  async (req, res) => {
+    res.setHeader(
+      "Access-Control-Allow-Origin",
+      "https://www.english21days.co.il"
+    );
 
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
-  const { email, name, password } = req.params;
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With,Content-Type, Authorization,Accept"
+    );
+    const { email, name, password } = req.params;
 
-  console.log(name)
+    console.log(name);
 
-  // const config = {
-  //   method: "get",
-  //   url: `https://clickfunnel-progress-tracker.vercel.app/new-user/${name}/${email}/${password}`,
-  // };
+    // const config = {
+    //   method: "get",
+    //   url: `https://clickfunnel-progress-tracker.vercel.app/new-user/${name}/${email}/${password}`,
+    // };
 
-  // axios(config)
-  //   .then((res) => res.json())
-  //   .then((json) => {
-  //     console.log('success',json);
+    // axios(config)
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     console.log('success',json);
 
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
-  const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`;
+    const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`;
 
-  const msg = {
-    to: email,
-    from: " אסף (FLOW פשוט לדבר אנגלית) <info@english21days.co.il>",
-    subject: `${name}  ברוכים הבאים  `,
+    const msg = {
+      to: email,
+      from: " אסף (FLOW פשוט לדבר אנגלית) <info@english21days.co.il>",
+      subject: `${name}  ברוכים הבאים  `,
 
-    html: `
+      html: `
     <div style=" direction:rtl ; text-align:right">
     הי ${name} !
     <br />
@@ -428,22 +424,19 @@ FLOW
 <br />
 <div>
     `,
-  };
+    };
 
-  await sgMail.send(msg, function (err, info) {
-    if (err) {
-      console.log(`Email Not Sent Error Occured => ${err}`);
-      return res.status(422).json({ err });
-    } else {
-      console.log(`Email was Sent`);
-      return res.status(200).json({ message: "success" });
-    }
-  });
-});
-
-
-
-
+    await sgMail.send(msg, function (err, info) {
+      if (err) {
+        console.log(`Email Not Sent Error Occured => ${err}`);
+        return res.status(422).json({ err });
+      } else {
+        console.log(`Email was Sent`);
+        return res.status(200).json({ message: "success" });
+      }
+    });
+  }
+);
 
 //send email 2nd time after waiting 15 mins
 app.get("/forgot-password/:rawemail", async (req, res) => {
