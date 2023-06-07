@@ -56,14 +56,12 @@ const englishBy = (name, email) => {
 const smallTalk = async (name, email) => {
   const data = new FormData();
   data.append("contact[email]", email);
-  data.append("contact[name]", name);
 
   const config = {
     method: "post",
     url: "https://www.english21days.co.il/thank-you1673812934818",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-
       ...data.getHeaders(),
     },
     data: data,
