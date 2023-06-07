@@ -62,13 +62,15 @@ const smallTalk = async (name, email) => {
     url: "https://www.english21days.co.il/thank-you1673812934818",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
+      Cookie:
+        "_etison_sessions_dcs_v2=5ade8e7e3123879d38fa4325e894922b; __cf_bm=csnZ9yeFZuFmvHbve90hUZ3z1FjJZhW7hlhzHgPpeLo-1673900333-0-AS/qLOOncO3ov9LkHfo6yr2qhtrK8ZuVqQbE3SqWRaudHoI18WlX9YD85wL2o7PUwYBh8gRURyLbh6th3aD7XoOD1sTJX9uEYx1PudeWO2xW",
       ...data.getHeaders(),
     },
     data: data,
   };
 
   try {
-    const res = axios(config);
+    const res = await axios(config);
     if (res.status) {
       console.log(res.status);
     }
