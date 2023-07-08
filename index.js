@@ -337,6 +337,100 @@ FLOW
   });
 });
 
+//send email for health course 
+app.get("/send-success-email-health/:name/:email/:password", async (req, res) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://go.triola.co.il"
+  );
+
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
+  const { email, name, password } = req.params;
+
+  console.log(name);
+
+  // const config = {
+  //   method: "get",
+  //   url: `https://clickfunnel-progress-tracker.vercel.app/new-user/${name}/${email}/${password}`,
+  // };
+
+  // axios(config)
+  //   .then((res) => res.json())
+  //   .then((json) => {
+  //     console.log('success',json);
+
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+
+  const link = `https://go.triola.co.il/login1685629993499?page_id=59519676&page_key=rtf3frkbrv04d21y&login_redirect=1&autofill=true&email=${email}&password=${password}`;
+
+  const msg = {
+    to: email,
+    from: " נועה (הפרעות אכילה) <info@triola.co.il>",
+    subject: `${name}  ברוכים הבאים  `,
+
+    html: `
+    <div style=" direction:rtl ; text-align:right">
+    הי ${name} !
+    <br />
+    <br />
+ברוכים הבאים לקורס :-)
+<br />
+<br />
+<b>לגישה מיידית לקורס <a href='${link}'>היכנסי לכאן</a> ולחצי על הכפתור בתחתית הדף.</b>
+<br />
+<br />
+<b>שימי לב:</b>
+<br />
+<br />
+במידה ושם המשתמש והסיסמא לא מופיעים באופן אוטומטי, להלן הפרטים:
+<br />
+<br />
+${email}
+<br />
+<br />
+סיסמה:
+<br />
+<br />
+${password}
+<br />
+<br />
+ כדאי לשמור את הפרטים האלה במקום שיהיה לך קל למצוא
+<br />
+<br />
+שיהיה לך המון בהצלחה!!
+<br />
+<br />
+בברכה,
+<br />
+נועה
+<br />
+--
+<br />
+<br />
+<div>
+    `,
+  };
+  await sgMail.send(msg, function (err, info) {
+    if (err) {
+      console.log(`Email Not Sent Error Occured => ${err}`);
+      return res.status(422).json({ err });
+    } else {
+      console.log(`Email was Sent`);
+      return res.status(200).json({ message: "success" });
+    }
+  });
+});
+
 //send email
 app.get(
   "/send-success-email-thanks/:name/:email/:password",
@@ -437,6 +531,9 @@ FLOW
     });
   }
 );
+
+
+
 
 //send email 2nd time after waiting 15 mins
 app.get("/forgot-password/:rawemail", async (req, res) => {
