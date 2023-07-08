@@ -561,7 +561,25 @@ app.get("/password", (req, res) => {
   return res.status(200).json({ password: password });
 });
 
-app.post("/refund", (req, res) => {});
+app.get("/membership-password", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://go.triola.co.il");
+
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,Content-Type, Authorization,Accept"
+  );
+
+  const password = generator.generate({
+    length: 6,
+    numbers: true,
+  });
+
+  return res.status(200).json({ password: password });
+});
 
 app.listen(process.env.PORT, function () {
   console.log(`server is running ${process.env.PORT}`);
