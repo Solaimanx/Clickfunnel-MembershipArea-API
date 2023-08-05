@@ -273,7 +273,8 @@ app.get("/send-success-email/:name/:email/:password", async (req, res) => {
   //     console.log(error);
   //   });
 
-  const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`;
+
+  const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`
 
   const msg = {
     to: email,
@@ -467,8 +468,10 @@ app.get(
     //     console.log(error);
     //   });
 
-    const link = `https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1&autofill=true&email=${email}&password=${password}`;
+  
+    const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`
 
+    
     const msg = {
       to: email,
       from: " אסף (FLOW פשוט לדבר אנגלית) <info@english21days.co.il>",
