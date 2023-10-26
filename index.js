@@ -38,7 +38,7 @@ const addTag = require("./Tags");
 
 app.get("/", (req, res) => {
   res.send({
-    server: "up and running",
+    server: "up",
     note: "working",
   });
 });
