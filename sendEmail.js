@@ -30,7 +30,7 @@ const sendSuccessEmail = async ({ email, name, password }) => {
 ניתן גם להיכנס לתוכנית באופן ידני באופן הבא:
 <br />
 <br />
-<a href='${loginLink}'>לעמוד הכניסה</a> היכנס
+<a href='${loginLink}'>היכנס לעמוד הכניסה</a>
 <br />
 <br />
 שם משתמש:
@@ -106,7 +106,7 @@ const sendSuccessEmailThanks = async ({ email, name, password }) => {
   במידה ושם המשתמש והסיסמא לא מופיעים באופן אוטומטי, להלן הפרטים:
 <br />
 <br />
-<a href='${loginLink}'>לעמוד הכניסה</a> היכנס
+<a href='${loginLink}'>היכנס לעמוד הכניסה</a>
 <br />
   <br />
   ${email}
