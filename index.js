@@ -11,6 +11,12 @@ const app = express();
 const cors = require("cors");
 const FormData = require("form-data");
 const sgMail = require("@sendgrid/mail");
+const { generatePassword } = require("./utils");
+const {
+  sendSuccessEmail,
+  sendSuccessEmailThanks,
+  sendSuccessEmailHealth,
+} = require("./sendEmail");
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,18 +51,6 @@ app.get("/", (req, res) => {
 
 /// adding basic and pro tags
 app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
   const { name, email } = req.params;
   console.log(name);
 
@@ -92,11 +86,7 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
           addTag.pro(name, email);
         });
 
-        const password = generator.generate({
-          length: 9,
-          numbers: true,
-        });
-
+        const password = generatePassword();
         return res.status(200).json({ password: password });
       }
       console.log(response.status);
@@ -109,18 +99,6 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
 
 /// adding basic and pro and small talk tags
 app.get("/add-basic-pro-smalltalk/:name/:email", async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
   const { name, email } = req.params;
   console.log(name);
 
@@ -159,10 +137,7 @@ app.get("/add-basic-pro-smalltalk/:name/:email", async (req, res, next) => {
           addTag.smallTalk(name, email);
         });
 
-        const password = generator.generate({
-          length: 9,
-          numbers: true,
-        });
+        const password = generatePassword();
 
         return res.status(200).json({ password: password });
       }
@@ -176,19 +151,6 @@ app.get("/add-basic-pro-smalltalk/:name/:email", async (req, res, next) => {
 
 /// adding 'english by the way ' tag
 app.get("/add-english-bytheway/:name/:email", (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
-
   const { name, email } = req.params;
   console.log(name);
 
@@ -224,10 +186,7 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
           addTag.englishBy(name, email);
         });
 
-        const password = generator.generate({
-          length: 9,
-          numbers: true,
-        });
+        const password = generatePassword();
 
         return res.status(200).json({ password: password });
       }
@@ -241,319 +200,59 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
 
 //send email
 app.get("/send-success-email/:name/:email/:password", async (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
-
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
   const { email, name, password } = req.params;
-
-  console.log(name);
-
-  // const config = {
-  //   method: "get",
-  //   url: `https://clickfunnel-progress-tracker.vercel.app/new-user/${name}/${email}/${password}`,
-  // };
-
-  // axios(config)
-  //   .then((res) => res.json())
-  //   .then((json) => {
-  //     console.log('success',json);
-
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-
-
-  const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`
-
-  const msg = {
-    to: email,
-    from: " אסף (FLOW פשוט לדבר אנגלית) <info@english21days.co.il>",
-    subject: `${name}  ברוכים הבאים  `,
-
-    html: `
-    <div style=" direction:rtl ; text-align:right">
-    הי ${name} !
-    <br />
-    <br />
-ברוכים הבאים לתוכנית :-)
-<br />
-<br />
-<b>לגישה מיידית לתוכנית <a href='${link}'>היכנס לכאן</a> ולחץ על הכפתור בתחתית הדף.</b>
-<br />
-<br />
-<b>שים לב:</b>
-<br />
-<br />
-במידה ושם המשתמש והסיסמא לא מופיעים באופן אוטומטי, להלן הפרטים:
-<br />
-<br />
-${email}
-<br />
-<br />
-סיסמה:
-<br />
-<br />
-${password}
-<br />
-<br />
- כדאי לשמור את הפרטים האלה במקום שיהיה לך קל למצוא
-<br />
-<br />
-שיהיה לך המון בהצלחה!!
-<br />
-<br />
-בברכה,
-<br />
-אסף
-<br />
---
-<br />
-<br />
-FLOW
-פשוט לדבר אנגלית
-<br />
-<div>
-    `,
-  };
-
-  await sgMail.send(msg, function (err, info) {
-    if (err) {
-      console.log(`Email Not Sent Error Occured => ${err}`);
-      return res.status(422).json({ err });
-    } else {
-      console.log(`Email was Sent`);
-      return res.status(200).json({ message: "success" });
-    }
+  const isSend = await sendSuccessEmail({
+    email,
+    name,
+    password,
   });
+  if (isSend == 200) {
+    return res.status(200).json({ message: "success" });
+  } else {
+    return res.status(422).json({ err: "error" });
+  }
 });
 
-//send email for health course 
-app.get("/send-success-email-health/:name/:email/:password", async (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://go.triola.co.il"
-  );
+//send email for health course
+app.get(
+  "/send-success-email-health/:name/:email/:password",
+  async (req, res) => {
+    const { email, name, password } = req.params;
 
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
-  const { email, name, password } = req.params;
-
-  console.log(name);
-
-  // const config = {
-  //   method: "get",
-  //   url: `https://clickfunnel-progress-tracker.vercel.app/new-user/${name}/${email}/${password}`,
-  // };
-
-  // axios(config)
-  //   .then((res) => res.json())
-  //   .then((json) => {
-  //     console.log('success',json);
-
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-
-  const link = `https://go.triola.co.il/login1685629993499?page_id=59519676&page_key=rtf3frkbrv04d21y&login_redirect=1&autofill=true&email=${email}&password=${password}`;
-
-  const msg = {
-    to: email,
-    from: " נועה (הפרעות אכילה) <info@triola.co.il>",
-    subject: `${name}  ברוכים הבאים  `,
-
-    html: `
-    <div style=" direction:rtl ; text-align:right">
-    הי ${name} !
-    <br />
-    <br />
-ברוכים הבאים לקורס :-)
-<br />
-<br />
-<b>לגישה מיידית לקורס <a href='${link}'>היכנסי לכאן</a> ולחצי על הכפתור בתחתית הדף.</b>
-<br />
-<br />
-<b>שימי לב:</b>
-<br />
-<br />
-במידה ושם המשתמש והסיסמא לא מופיעים באופן אוטומטי, להלן הפרטים:
-<br />
-<br />
-${email}
-<br />
-<br />
-סיסמה:
-<br />
-<br />
-${password}
-<br />
-<br />
- כדאי לשמור את הפרטים האלה במקום שיהיה לך קל למצוא
-<br />
-<br />
-שיהיה לך המון בהצלחה!!
-<br />
-<br />
-בברכה,
-<br />
-נועה
-<br />
---
-<br />
-<br />
-<div>
-    `,
-  };
-  await sgMail.send(msg, function (err, info) {
-    if (err) {
-      console.log(`Email Not Sent Error Occured => ${err}`);
-      return res.status(422).json({ err });
-    } else {
-      console.log(`Email was Sent`);
+    const isSend = await sendSuccessEmailHealth({
+      email,
+      name,
+      password,
+    });
+    if (isSend == 200) {
       return res.status(200).json({ message: "success" });
+    } else {
+      return res.status(422).json({ err: "error" });
     }
-  });
-});
+  }
+);
 
 //send email
 app.get(
   "/send-success-email-thanks/:name/:email/:password",
   async (req, res) => {
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://www.english21days.co.il"
-    );
-
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "X-Requested-With,Content-Type, Authorization,Accept"
-    );
     const { email, name, password } = req.params;
 
-    console.log(name);
-
-    // const config = {
-    //   method: "get",
-    //   url: `https://clickfunnel-progress-tracker.vercel.app/new-user/${name}/${email}/${password}`,
-    // };
-
-    // axios(config)
-    //   .then((res) => res.json())
-    //   .then((json) => {
-    //     console.log('success',json);
-
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-  
-    const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`
-
-    
-    const msg = {
-      to: email,
-      from: " אסף (FLOW פשוט לדבר אנגלית) <info@english21days.co.il>",
-      subject: `${name}  ברוכים הבאים  `,
-
-      html: `
-    <div style=" direction:rtl ; text-align:right">
-    הי ${name} !
-    <br />
-    <br />
-    ברוכים הבאים ל 5000 המילים :-)
-<br />
-<br />
-<b> לגישה מיידית <a href='${link}'>היכנס לכאן</a> ולחץ על הכפתור בתחתית הדף.</b>
-<br />
-<br />
-<b>שים לב:</b>
-<br />
-<br />
-במידה ושם המשתמש והסיסמא לא מופיעים באופן אוטומטי, להלן הפרטים:
-<br />
-<br />
-${email}
-<br />
-<br />
-סיסמה:
-<br />
-<br />
-${password}
-<br />
-<br />
- כדאי לשמור את הפרטים האלה במקום שיהיה לך קל למצוא
-<br />
-<br />
-שיהיה לך המון בהצלחה!!
-<br />
-<br />
-בברכה,
-<br />
-אסף
-<br />
---
-<br />
-<br />
-FLOW
-פשוט לדבר אנגלית
-<br />
-<div>
-    `,
-    };
-
-    await sgMail.send(msg, function (err, info) {
-      if (err) {
-        console.log(`Email Not Sent Error Occured => ${err}`);
-        return res.status(422).json({ err });
-      } else {
-        console.log(`Email was Sent`);
-        return res.status(200).json({ message: "success" });
-      }
+    const isSend = await sendSuccessEmailThanks({
+      email,
+      name,
+      password,
     });
+    if (isSend == 200) {
+      return res.status(200).json({ message: "success" });
+    } else {
+      return res.status(422).json({ err: "error" });
+    }
   }
 );
 
-
-
-
 //send email 2nd time after waiting 15 mins
 app.get("/forgot-password/:rawemail", async (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
-
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
-
   const { rawemail } = req.params;
 
   const currectTime = new Date().getTime() + 1 * 60 * 1000;
@@ -566,7 +265,6 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
       to: email,
       from: " אסף (פלואו לימוד אנגלית)  <info@english21days.co.il>",
       subject: `פרטי הגישה שלך `,
-
       html: `
     <table style="  direction:rtl ; text-align:right ; width:100%;border-spacing:0px;border-collapse:collapse;border-width:medium;border-style:none" role="presentation">
                                   <tbody>
@@ -639,45 +337,13 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
 });
 
 app.get("/password", (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.english21days.co.il"
-  );
-
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
-
-  const password = generator.generate({
-    length: 9,
-    numbers: true,
-  });
-
+  const password = generatePassword();
   return res.status(200).json({ password: password });
 });
 
 app.get("/membership-password", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "https://go.triola.co.il");
-
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,Content-Type, Authorization,Accept"
-  );
-
-  const password = generator.generate({
-    length: 9,
-    numbers: true,
-  });
-
+  const password = generatePassword();
   return res.status(200).json({ password: password });
 });
 
