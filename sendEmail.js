@@ -11,48 +11,56 @@ const sendSuccessEmail = async ({ email, name, password }) => {
     subject: `${name}  ברוכים הבאים  `,
 
     html: `
-        <div style=" direction:rtl ; text-align:right">
-        הי ${name} !
-        <br />
-        <br />
-    ברוכים הבאים לתוכנית :-)
+    <div style=" direction:rtl ; text-align:right">
+    הי ${name} !
     <br />
     <br />
-    <b>לגישה מיידית לתוכנית <a href='${link}'>היכנס לכאן</a> ולחץ על הכפתור בתחתית הדף.</b>
-    <br />
-    <br />
-    <b>שים לב:</b>
-    <br />
-    <br />
-    במידה ושם המשתמש והסיסמא לא מופיעים באופן אוטומטי, להלן הפרטים:
-    <br />
-    <br />
-    ${email}
-    <br />
-    <br />
-    סיסמה:
-    <br />
-    <br />
-    ${password}
-    <br />
-    <br />
-     כדאי לשמור את הפרטים האלה במקום שיהיה לך קל למצוא
-    <br />
-    <br />
-    שיהיה לך המון בהצלחה!!
-    <br />
-    <br />
-    בברכה,
-    <br />
-    אסף
-    <br />
-    --
-    <br />
-    <br />
-    FLOW
-    פשוט לדבר אנגלית
-    <br />
-    <div>
+ברוכים הבאים לתוכנית :-)
+<br />
+<br />
+<b style="font-size:20px">לגישה מיידית לתוכנית <a href='${link}'>היכנס לכאן</a></b>
+<br />
+(אין צורך בשם משתמש וסיסמא)
+<br />
+<br />
+<b>שים לב:</b>
+<br />
+<br />
+ניתן גם להיכנס לתוכנית באופן ידני באופן הבא:
+<br />
+<br />
+היכנס [לעמוד הכניסה]
+<br />
+<br />
+שם משתמש:
+<br />
+<br />
+${email}
+<br />
+<br />
+סיסמה:
+<br />
+<br />
+${password}
+<br />
+<br />
+ כדאי לשמור את הפרטים האלה במקום שיהיה לך קל למצוא
+<br />
+<br />
+שיהיה לך המון בהצלחה!!
+<br />
+<br />
+בברכה,
+<br />
+אסף
+<br />
+--
+<br />
+<br />
+FLOW
+פשוט לדבר אנגלית
+<br />
+<div>
         `,
   };
   const result = new Promise(async (resolve, reject) => {
@@ -85,7 +93,9 @@ const sendSuccessEmailThanks = async ({ email, name, password }) => {
       ברוכים הבאים ל 5000 המילים :-)
   <br />
   <br />
-  <b> לגישה מיידית <a href='${link}'>היכנס לכאן</a> ולחץ על הכפתור בתחתית הדף.</b>
+  <b style="font-size:20px">לגישה מיידית לתוכנית <a href='${link}'>היכנס לכאן</a></b>
+  <br />
+(אין צורך בשם משתמש וסיסמא)
   <br />
   <br />
   <b>שים לב:</b>
@@ -137,17 +147,15 @@ const sendSuccessEmailThanks = async ({ email, name, password }) => {
   return result;
 };
 
-
 const sendSuccessEmailHealth = async ({ email, name, password }) => {
-    const link = `https://go.triola.co.il/login1685629993499?page_id=59519676&page_key=rtf3frkbrv04d21y&login_redirect=1&autofill=true&email=${email}&password=${password}`;
-  
-   
-    const msg = {
-        to: email,
-        from: " נועה (הפרעות אכילה) <info@triola.co.il>",
-        subject: `${name}  ברוכים הבאים  `,
-  
-        html: `
+  const link = `https://go.triola.co.il/login1685629993499?page_id=59519676&page_key=rtf3frkbrv04d21y&login_redirect=1&autofill=true&email=${email}&password=${password}`;
+
+  const msg = {
+    to: email,
+    from: " נועה (הפרעות אכילה) <info@triola.co.il>",
+    subject: `${name}  ברוכים הבאים  `,
+
+    html: `
       <div style=" direction:rtl ; text-align:right">
       הי ${name} !
       <br />
@@ -155,7 +163,9 @@ const sendSuccessEmailHealth = async ({ email, name, password }) => {
   ברוכים הבאים לקורס :-)
   <br />
   <br />
-  <b>לגישה מיידית לקורס <a href='${link}'>היכנסי לכאן</a> ולחצי על הכפתור בתחתית הדף.</b>
+  <b style="font-size:20px">לגישה מיידית לתוכנית <a href='${link}'>היכנס לכאן</a></b>
+  <br />
+(אין צורך בשם משתמש וסיסמא)
   <br />
   <br />
   <b>שימי לב:</b>
@@ -188,24 +198,24 @@ const sendSuccessEmailHealth = async ({ email, name, password }) => {
   <br />
   <div>
       `,
-      };
-    const result = new Promise(async (resolve, reject) => {
-      await sgMail.send(msg, async function (err, info) {
-        if (err) {
-          console.log(`Email Not Sent Error Occured => ${err}`);
-          resolve(422);
-        } else {
-          console.log(`Email was Sent`);
-          resolve(200);
-        }
-      });
-    });
-  
-    return result;
   };
-  
-  
+  const result = new Promise(async (resolve, reject) => {
+    await sgMail.send(msg, async function (err, info) {
+      if (err) {
+        console.log(`Email Not Sent Error Occured => ${err}`);
+        resolve(422);
+      } else {
+        console.log(`Email was Sent`);
+        resolve(200);
+      }
+    });
+  });
 
+  return result;
+};
 
-
-module.exports = { sendSuccessEmail, sendSuccessEmailThanks ,sendSuccessEmailHealth };
+module.exports = {
+  sendSuccessEmail,
+  sendSuccessEmailThanks,
+  sendSuccessEmailHealth,
+};
