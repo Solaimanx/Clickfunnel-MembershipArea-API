@@ -93,7 +93,7 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
         });
 
         const password = generator.generate({
-          length: 6,
+          length: 9,
           numbers: true,
         });
 
@@ -160,7 +160,7 @@ app.get("/add-basic-pro-smalltalk/:name/:email", async (req, res, next) => {
         });
 
         const password = generator.generate({
-          length: 6,
+          length: 9,
           numbers: true,
         });
 
@@ -225,7 +225,7 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
         });
 
         const password = generator.generate({
-          length: 6,
+          length: 9,
           numbers: true,
         });
 
@@ -654,7 +654,7 @@ app.get("/password", (req, res) => {
   );
 
   const password = generator.generate({
-    length: 6,
+    length: 9,
     numbers: true,
   });
 
@@ -674,7 +674,7 @@ app.get("/membership-password", (req, res) => {
   );
 
   const password = generator.generate({
-    length: 6,
+    length: 9,
     numbers: true,
   });
 
