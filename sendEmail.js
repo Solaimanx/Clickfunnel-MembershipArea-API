@@ -80,6 +80,7 @@ FLOW
 };
 const sendSuccessEmailThanks = async ({ email, name, password }) => {
   const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`;
+  const loginLink = 'https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1'
 
   const msg = {
     to: email,
