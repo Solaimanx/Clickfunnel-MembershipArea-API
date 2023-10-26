@@ -4,6 +4,7 @@ sgMail.setApiKey(process.env.SENDGRID_API);
 
 const sendSuccessEmail = async ({ email, name, password }) => {
   const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`;
+  const loginLink = 'https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1'
 
   const msg = {
     to: email,
@@ -29,7 +30,7 @@ const sendSuccessEmail = async ({ email, name, password }) => {
 ניתן גם להיכנס לתוכנית באופן ידני באופן הבא:
 <br />
 <br />
-היכנס [לעמוד הכניסה]
+<a href='${loginLink}'>לעמוד הכניסה</a> היכנס
 <br />
 <br />
 שם משתמש:
@@ -102,7 +103,10 @@ const sendSuccessEmailThanks = async ({ email, name, password }) => {
   <br />
   <br />
   במידה ושם המשתמש והסיסמא לא מופיעים באופן אוטומטי, להלן הפרטים:
-  <br />
+<br />
+<br />
+<a href='${loginLink}'>לעמוד הכניסה</a> היכנס
+<br />
   <br />
   ${email}
   <br />
