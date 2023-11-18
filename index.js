@@ -17,10 +17,13 @@ const {
   sendSuccessEmailThanks,
   sendSuccessEmailHealth,
 } = require("./sendEmail");
+const addClickFunnelTag = require('./addClickfunnelTag')
+
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 
 const corsOptions = {
   origin: "https://www.english21days.co.il",
@@ -52,8 +55,8 @@ app.get("/", (req, res) => {
 /// adding basic and pro tags
 app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
   const { name, email } = req.params;
-  console.log(name);
 
+  addClickFunnelTag(email,'pro,basic')
   const data = new FormData();
   data.append("contact[email]", email);
   data.append("contact[name]", name);
@@ -101,7 +104,7 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
 app.get("/add-basic-pro-smalltalk/:name/:email", async (req, res, next) => {
   const { name, email } = req.params;
   console.log(name);
-
+  addClickFunnelTag(email,'pro,basic,small-talk')
   const data = new FormData();
   data.append("contact[email]", email);
   data.append("contact[name]", name);
