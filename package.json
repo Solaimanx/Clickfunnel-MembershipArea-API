@@ -8,7 +8,8 @@
     "express": "^4.17.1",
     "form-data": "^4.0.0",
     "generate-password": "^1.6.1",
-    "node-schedule": "^2.0.0"
+    "node-schedule": "^2.0.0",
+    "openai": "^4.20.1"
   },
   "name": "clickfunnelmembershipapi",
   "version": "1.0.0",
