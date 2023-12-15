@@ -6,7 +6,7 @@ const openai = new OpenAI({
 
 const getQuestionsBasedOnTopic = async (req, res) => {
   const { level, topic } = req.body;
-  if(!level || !topic) return res.status(404).send('input cant be Empty')
+  if (!level || !topic) return res.status(404).send("input cant be Empty");
 
   try {
     const completion = await openai.chat.completions.create({
@@ -17,7 +17,7 @@ const getQuestionsBasedOnTopic = async (req, res) => {
         },
         {
           role: "user",
-          content: `List 25 common sentences in plain English (complete sentences, no brackets, ${level}) on the following topic: ${topic}`,
+          content: `List 25 common sentences in plain English and translate it to hebrew (complete sentences, no brackets, ${level}) on the following topic: ${topic} )`,
         },
       ],
       model: "gpt-3.5-turbo-1106",
@@ -26,7 +26,14 @@ const getQuestionsBasedOnTopic = async (req, res) => {
 
     const raw = completion.choices[0].message.content;
     const data = JSON.parse(raw);
-    res.json({ questions: data.sentences });
+    const english = [];
+    const hebrew = [];
+    data.sentences.forEach((element) => {
+      english.push(element.english);
+      hebrew.push(element.hebrew);
+    });
+
+    res.json({ english, hebrew });
   } catch (err) {
     console.log(err);
     res.status(404).send("failed");
