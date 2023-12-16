@@ -26,14 +26,7 @@ const getQuestionsBasedOnTopic = async (req, res) => {
 
     const raw = completion.choices[0].message.content;
     const data = JSON.parse(raw);
-    const english = [];
-    const hebrew = [];
-    data.sentences.forEach((element) => {
-      english.push(element.english);
-      hebrew.push(element.hebrew);
-    });
-
-    res.json({ english, hebrew });
+    res.json(data.sentences);
   } catch (err) {
     console.log(err);
     res.status(404).send("failed");
