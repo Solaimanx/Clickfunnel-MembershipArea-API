@@ -17,7 +17,7 @@ const getQuestionsBasedOnTopic = async (req, res) => {
         },
         {
           role: "user",
-          content: `List 25 common sentences in plain English and translate it to hebrew (complete sentences, no brackets, ${level}) on the following topic: ${topic} )`,
+          content: `List 25 common sentences in plain English and translate it to hebrew (complete sentences, no brackets, ${level}) on the following topic: ${topic} ) put into differnt array , english array name is englishQuestions , hebrew array name is hebrewQuestions`,
         },
       ],
       model: "gpt-3.5-turbo-1106",
@@ -26,7 +26,7 @@ const getQuestionsBasedOnTopic = async (req, res) => {
 
     const raw = completion.choices[0].message.content;
     const data = JSON.parse(raw);
-    res.json(data.sentences);
+    return res.json(data);
   } catch (err) {
     console.log(err);
     res.status(404).send("failed");
