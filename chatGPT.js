@@ -29,8 +29,7 @@ const getQuestionsBasedOnTopic = async (req, res) => {
       .replace(/[\r\n]/gm, "")
       .replaceAll("", "")
       .trim();
-    const data = JSON.parse(parsed);
-    return res.json({ data });
+    return res.json({ parsed });
   } catch (err) {
     console.log(err);
     res.status(404).send("failed");
