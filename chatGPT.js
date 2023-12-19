@@ -25,8 +25,12 @@ const getQuestionsBasedOnTopic = async (req, res) => {
     });
 
     const raw = completion.choices[0].message.content;
-    // const data = JSON.parse(raw);
-    return res.json({raw });
+    const parsed = raw
+      .replace(/[\r\n]/gm, "")
+      .replaceAll("", "")
+      .trim();
+    const data = JSON.parse(parsed);
+    return res.json({ data });
   } catch (err) {
     console.log(err);
     res.status(404).send("failed");
