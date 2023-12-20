@@ -77,21 +77,53 @@ app.get("/add-basic-pro/:name/:email", async (req, res, next) => {
       if (response.status == 200) {
         const twomins = new Date().getTime() + 2 * 60 * 1000;
         const dateTwo = new Date(twomins);
-
-        const fivemins = new Date().getTime() + 5 * 60 * 1000;
-        const dateFive = new Date(fivemins);
-
         schedule.scheduleJob(dateTwo, function () {
           addTag.pro(name, email);
         });
-        schedule.scheduleJob(dateFive, function () {
-          addTag.pro(name, email);
-        });
-
         const password = generatePassword();
         return res.status(200).json({ password: password });
       }
       console.log(response.status);
+    })
+    .catch(function (error) {
+      console.log(error);
+      return res.status(500).json({ error });
+    });
+});
+
+/// adding restart basic and pro tags
+app.get("/add-basic-pro-restart/:name/:email", async (req, res, next) => {
+  const { name, email } = req.params;
+
+  addClickFunnelTag(email, "pro,basic,restart");
+  const data = new FormData();
+  data.append("contact[email]", email);
+  data.append("contact[name]", name);
+
+  const config = {
+    method: "post",
+    url: "https://www.english21days.co.il/thank-you1613545655691",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Cookie:
+        "_etison_sessions_dcs_v2=7412bffb8ce7f3aafce1859f9e9c7cf4; __cf_bm=gG6WILHsgOAhlnKeXuxdEwI0_MCVtH2.T15ph_Q_rAQ-1634414353-0-AdBEA4fpHXsO1CM0I2y0VkWx0KwWKNHg1oIPxAHN10+QslrFPS8tgf+AWsWVw1DGGH91z8YDSaZU9ByE3VHRwhnezM3aP1sZ/NNuW+slF4Mw",
+      ...data.getHeaders(),
+    },
+    data: data,
+  };
+
+  axios(config)
+    .then(function (response) {
+      if (response.status == 200) {
+        const twomins = new Date().getTime() + 2 * 60 * 1000;
+        const dateTwo = new Date(twomins);
+
+        schedule.scheduleJob(dateTwo, function () {
+          addTag.pro(name, email);
+        });
+        const password = generatePassword();
+        return res.status(200).json({ password: password });
+      }
     })
     .catch(function (error) {
       console.log(error);
