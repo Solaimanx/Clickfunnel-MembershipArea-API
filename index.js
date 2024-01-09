@@ -131,6 +131,14 @@ app.get("/add-basic-pro-restart/:name/:email", async (req, res, next) => {
     });
 });
 
+/// only get he password
+app.get("/genarate-password-course/:name/:email", async (req, res, next) => {
+  const { name, email } = req.params;
+  addClickFunnelTag(email, "restart");
+  const password = generatePassword();
+  return res.status(200).json({ password: password });
+});
+
 /// adding basic and pro and small talk tags
 app.get("/add-basic-pro-smalltalk/:name/:email", async (req, res, next) => {
   const { name, email } = req.params;
