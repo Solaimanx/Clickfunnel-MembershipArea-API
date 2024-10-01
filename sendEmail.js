@@ -4,7 +4,8 @@ sgMail.setApiKey(process.env.SENDGRID_API);
 
 const sendSuccessEmail = async ({ email, name, password }) => {
   const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`;
-  const loginLink = 'https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1'
+  const loginLink =
+    "https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1";
 
   const msg = {
     to: email,
@@ -63,6 +64,12 @@ FLOW
 <br />
 <div>
         `,
+    trackingSettings: {
+      clickTracking: {
+        enable: false, // Disable Click Tracking
+        enableText: false,
+      },
+    },
   };
   const result = new Promise(async (resolve, reject) => {
     await sgMail.send(msg, async function (err, info) {
@@ -80,7 +87,8 @@ FLOW
 };
 const sendSuccessEmailThanks = async ({ email, name, password }) => {
   const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`;
-  const loginLink = 'https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1'
+  const loginLink =
+    "https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1";
 
   const msg = {
     to: email,
@@ -136,6 +144,12 @@ const sendSuccessEmailThanks = async ({ email, name, password }) => {
   <br />
   <div>
       `,
+    trackingSettings: {
+      clickTracking: {
+        enable: false, // Disable Click Tracking
+        enableText: false,
+      },
+    },
   };
   const result = new Promise(async (resolve, reject) => {
     await sgMail.send(msg, async function (err, info) {
@@ -203,6 +217,12 @@ const sendSuccessEmailHealth = async ({ email, name, password }) => {
   <br />
   <div>
       `,
+    trackingSettings: {
+      clickTracking: {
+        enable: false, // Disable Click Tracking
+        enableText: false,
+      },
+    },
   };
   const result = new Promise(async (resolve, reject) => {
     await sgMail.send(msg, async function (err, info) {
