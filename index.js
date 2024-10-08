@@ -27,7 +27,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: "https://www.english21days.co.il",
+  origin: [
+    "https://www.english21days.co.il",
+    "https://url472.english21days.co.il",
+  ],
   methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS", "PATCH"],
   optionsSuccessStatus: 200,
   credentials: true,
