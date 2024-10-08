@@ -13,6 +13,8 @@ const FormData = require("form-data");
 const sgMail = require("@sendgrid/mail");
 const { generatePassword } = require("./utils");
 const { getQuestionsBasedOnTopic } = require("./chatGPT");
+const { retriveLink } = require("./tracking-link-decode/link-decode");
+
 const {
   sendSuccessEmail,
   sendSuccessEmailThanks,
@@ -390,6 +392,8 @@ app.get("/membership-password", (req, res) => {
 });
 
 app.post("/chatgpt", getQuestionsBasedOnTopic);
+
+app.get("/tracking-link-decode", retriveLink);
 
 app.listen(process.env.PORT, function () {
   console.log(`server is running ${process.env.PORT}`);
