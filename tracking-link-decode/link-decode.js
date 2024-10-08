@@ -3,7 +3,7 @@ const axios = require("axios");
 const retriveLink = async (req, res) => {
   const { query } = req;
   axios
-    .get(`http://167.89.115.120/ls/click?upn=${query.uid}`, {
+    .get(`http://167.89.115.120/ls/click?upn=${query.upn}`, {
       headers: {
         Host: "url472.english21days.co.il",
       },
