@@ -2,7 +2,7 @@ const generator = require("generate-password");
 
 const generatePassword = () => {
   const password = generator.generate({
-    length: 9,
+    length: 13,
     numbers: true,
     uppercase: true,
     lowercase: true,
