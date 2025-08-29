@@ -400,9 +400,9 @@ app.post("/chatgpt", getQuestionsBasedOnTopic);
 app.get("/tracking-link-decode", retriveLink);
 
 
-app.get('/solaiman-test',(req,res)=>{
-  gmail({
-    to:'solaiman@gmail.com',
+app.get('/solaiman-test',async(req,res)=>{
+  await gmail({
+    to:'solaiman321@gmail.com',
     subject:'testing ',
     message:'hello'
   })

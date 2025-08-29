@@ -19,7 +19,6 @@ const gmail = async ({
       ['https://www.googleapis.com/auth/gmail.send'], // Gmail API readonly scope
       "info@english21days.co.il" // impersonated user
     );
-    await auth.authorize()
     const gmail = google.gmail({ version: "v1", auth });
     const senderName = encodeHeader("אסף (פלואו לימוד אנגלית)");
 
