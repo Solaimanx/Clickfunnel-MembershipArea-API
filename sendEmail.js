@@ -1,6 +1,4 @@
-const sgMail = require("@sendgrid/mail");
-
-sgMail.setApiKey(process.env.SENDGRID_API);
+const gmail = require('./gmailInstance')
 
 const sendSuccessEmail = async ({ email, name, password }) => {
   const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`;
@@ -72,15 +70,18 @@ FLOW
     },
   };
   const result = new Promise(async (resolve, reject) => {
-    await sgMail.send(msg, async function (err, info) {
-      if (err) {
-        console.log(`Email Not Sent Error Occured => ${err}`);
-        resolve(422);
-      } else {
-        console.log(`Email was Sent`);
+
+       try{
+      await gmail({
+        to:msg.to,
+        message:msg.html,
+        subject:msg.subject
+      })
         resolve(200);
-      }
-    });
+    }catch(error){
+        console.log(`Email Not Sent Error Occured => ${error}`);
+        resolve(422);
+    }
   });
 
   return result;
@@ -152,15 +153,18 @@ const sendSuccessEmailThanks = async ({ email, name, password }) => {
     },
   };
   const result = new Promise(async (resolve, reject) => {
-    await sgMail.send(msg, async function (err, info) {
-      if (err) {
-        console.log(`Email Not Sent Error Occured => ${err}`);
-        resolve(422);
-      } else {
-        console.log(`Email was Sent`);
+       try{
+      await gmail({
+        to:msg.to,
+        message:msg.html,
+        subject:msg.subject
+      })
         resolve(200);
-      }
-    });
+    }catch(error){
+        console.log(`Email Not Sent Error Occured => ${error}`);
+        resolve(422);
+    }
+
   });
 
   return result;
@@ -225,15 +229,17 @@ const sendSuccessEmailHealth = async ({ email, name, password }) => {
     },
   };
   const result = new Promise(async (resolve, reject) => {
-    await sgMail.send(msg, async function (err, info) {
-      if (err) {
-        console.log(`Email Not Sent Error Occured => ${err}`);
-        resolve(422);
-      } else {
-        console.log(`Email was Sent`);
+      try{
+      await gmail({
+        to:msg.to,
+        message:msg.html,
+        subject:msg.subject
+      })
         resolve(200);
-      }
-    });
+    }catch(error){
+        console.log(`Email Not Sent Error Occured => ${error}`);
+        resolve(422);
+    }
   });
 
   return result;

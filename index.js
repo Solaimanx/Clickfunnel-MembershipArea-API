@@ -10,10 +10,10 @@ const generator = require("generate-password");
 const app = express();
 const cors = require("cors");
 const FormData = require("form-data");
-const sgMail = require("@sendgrid/mail");
 const { generatePassword } = require("./utils");
 const { getQuestionsBasedOnTopic } = require("./chatGPT");
 const { retriveLink } = require("./tracking-link-decode/link-decode");
+const gmail = require('./gmailInstance')
 
 const {
   sendSuccessEmail,
@@ -46,7 +46,6 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-sgMail.setApiKey(process.env.SENDGRID_API);
 const addTag = require("./Tags");
 
 app.get("/", (req, res) => {
@@ -371,13 +370,15 @@ app.get("/forgot-password/:rawemail", async (req, res) => {
     `,
     };
 
-    await sgMail.send(msg, function (err, info) {
-      if (err) {
-        console.log(`Email Not Sent Error Occured => ${err}`);
-      } else {
-        console.log(`Email was Sent`);
-      }
-    });
+    try{
+      await gmail({
+        to:msg.to,
+        message:msg.html,
+        subject:msg.subject
+      })
+    }catch(error){
+        console.log(`Email Not Sent Error Occured => ${error}`);
+    }
   });
 
   return res.status(200).json({ message: "success" });
@@ -397,6 +398,19 @@ app.get("/membership-password", (req, res) => {
 app.post("/chatgpt", getQuestionsBasedOnTopic);
 
 app.get("/tracking-link-decode", retriveLink);
+
+
+app.get('/solaiman-test',(req,res)=>{
+  gmail({
+    to:'solaiman@gmail.com',
+    subject:'testing ',
+    message:'hello'
+  })
+  res.json({
+    status:'success'
+  })
+})
+
 
 app.listen(process.env.PORT, function () {
   console.log(`server is running ${process.env.PORT}`);
