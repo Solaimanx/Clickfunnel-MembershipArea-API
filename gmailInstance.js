@@ -16,7 +16,9 @@ const gmail = async ({
       key.client_email,
       null,
       key.private_key,
-      ['https://www.googleapis.com/auth/gmail.send'], // Gmail API readonly scope
+      ['https://www.googleapis.com/auth/gmail.send',
+        'https://www.googleapis.com/auth/gmail.modify'
+      ], // Gmail API readonly scope
       "info@english21days.co.il" // impersonated user
     );
     const gmail = google.gmail({ version: "v1", auth });
@@ -42,6 +44,16 @@ const gmail = async ({
     userId: "me",
     requestBody: { raw: encodedMessage },
   });
+
+  const messageId = res.data.id;
+// Immediately remove "INBOX" label
+await gmail.users.messages.modify({
+  userId: "me",
+  id: messageId,
+  requestBody: {
+    removeLabelIds: ["INBOX"],
+  },
+});
 
   console.log("Email sent! Sub:", subject);
 
