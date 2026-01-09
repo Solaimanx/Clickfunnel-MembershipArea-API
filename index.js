@@ -440,6 +440,9 @@ app.post("/chatgpt", getQuestionsBasedOnTopic);
 
 app.get("/tracking-link-decode", retriveLink);
 
+// ClickFunnels 2.0 routes
+const clickfunnel20Routes = require("./clickfunnel 2.0/routes");
+app.use("/clickfunnel-2.0", clickfunnel20Routes);
 
 app.get('/solaiman-test',async(req,res)=>{
   await gmail({
@@ -451,6 +454,8 @@ app.get('/solaiman-test',async(req,res)=>{
     status:'success'
   })
 })
+
+
 
 
 app.listen(process.env.PORT, function () {
