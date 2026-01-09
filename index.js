@@ -30,6 +30,8 @@ const corsOptions = {
   origin: [
     "https://www.english21days.co.il",
     "https://url472.english21days.co.il",
+    "https://go.english21days.co.il",
+
   ],
   methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS", "PATCH"],
   optionsSuccessStatus: 200,
