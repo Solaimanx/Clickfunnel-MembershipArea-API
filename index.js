@@ -287,13 +287,25 @@ app.get("/add-english-bytheway/:name/:email", (req, res) => {
     });
 });
 
+
+// Resolve www vs go from Origin (preferred) or Referer. Default www to match
+// existing email links when the header is missing (e.g. non-browser callers).
+function resolveOriginVariant(req) {
+  const raw = req.headers.origin || req.headers.referer || "";
+  if (raw.includes("www.")) return "www";
+  if (raw.includes("go.")) return "go";
+  return "www";
+}
+
 //send email
 app.get("/send-success-email/:name/:email/:password", async (req, res) => {
   const { email, name, password } = req.params;
+  const originVariant = resolveOriginVariant(req);
   const isSend = await sendSuccessEmail({
     email,
     name,
     password,
+    originVariant,
   });
   if (isSend == 200) {
     return res.status(200).json({ message: "success" });
@@ -307,11 +319,13 @@ app.get(
   "/send-success-email-health/:name/:email/:password",
   async (req, res) => {
     const { email, name, password } = req.params;
+    const originVariant = resolveOriginVariant(req);
 
     const isSend = await sendSuccessEmailHealth({
       email,
       name,
       password,
+      originVariant,
     });
     if (isSend == 200) {
       return res.status(200).json({ message: "success" });
@@ -326,11 +340,13 @@ app.get(
   "/send-success-email-thanks/:name/:email/:password",
   async (req, res) => {
     const { email, name, password } = req.params;
+    const originVariant = resolveOriginVariant(req);
 
     const isSend = await sendSuccessEmailThanks({
       email,
       name,
       password,
+      originVariant,
     });
     if (isSend == 200) {
       return res.status(200).json({ message: "success" });

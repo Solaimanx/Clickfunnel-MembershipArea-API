@@ -1,9 +1,11 @@
 const gmail = require('./gmailInstance')
 
-const sendSuccessEmail = async ({ email, name, password }) => {
+const sendSuccessEmail = async ({ email, name, password, originVariant = "www" }) => {
   const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`;
+  // Only the login link subdomain follows request Origin (www vs go).
+  const loginHost = originVariant === "go" ? "go.english21days.co.il" : "www.english21days.co.il";
   const loginLink =
-    "https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1";
+    `https://${loginHost}/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1`;
 
   const msg = {
     to: email,
@@ -86,10 +88,12 @@ FLOW
 
   return result;
 };
-const sendSuccessEmailThanks = async ({ email, name, password }) => {
+const sendSuccessEmailThanks = async ({ email, name, password, originVariant = "www" }) => {
   const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`;
+  // Only the login link subdomain follows request Origin (www vs go).
+  const loginHost = originVariant === "go" ? "go.english21days.co.il" : "www.english21days.co.il";
   const loginLink =
-    "https://www.english21days.co.il/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1";
+    `https://${loginHost}/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1`;
 
   const msg = {
     to: email,
@@ -170,8 +174,10 @@ const sendSuccessEmailThanks = async ({ email, name, password }) => {
   return result;
 };
 
-const sendSuccessEmailHealth = async ({ email, name, password }) => {
-  const link = `https://go.triola.co.il/login1685629993499?page_id=59519676&page_key=rtf3frkbrv04d21y&login_redirect=1&autofill=true&email=${email}&password=${password}`;
+const sendSuccessEmailHealth = async ({ email, name, password, originVariant = "www" }) => {
+  // Subdomain follows request Origin (go vs www); path/query unchanged.
+  const host = originVariant === "go" ? "go.triola.co.il" : "www.triola.co.il";
+  const link = `https://${host}/login1685629993499?page_id=59519676&page_key=rtf3frkbrv04d21y&login_redirect=1&autofill=true&email=${email}&password=${password}`;
 
   const msg = {
     to: email,
