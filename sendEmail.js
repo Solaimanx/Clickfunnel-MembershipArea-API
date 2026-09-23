@@ -1,11 +1,11 @@
 const gmail = require('./gmailInstance')
 
 const sendSuccessEmail = async ({ email, name, password, originVariant = "www" }) => {
-  const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`;
-  // Only the login link subdomain follows request Origin (www vs go).
-  const loginHost = originVariant === "go" ? "go.english21days.co.il" : "www.english21days.co.il";
+  // Both the primary link and login link subdomain follow request Origin (www vs go).
+  const host = originVariant === "go" ? "go.english21days.co.il" : "www.english21days.co.il";
+  const link = `https://${host}/thank-you1691248976798?e=${email}&p=${password}`;
   const loginLink =
-    `https://${loginHost}/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1`;
+    `https://${host}/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1`;
 
   const msg = {
     to: email,
@@ -89,11 +89,11 @@ FLOW
   return result;
 };
 const sendSuccessEmailThanks = async ({ email, name, password, originVariant = "www" }) => {
-  const link = `https://www.english21days.co.il/thank-you1691248976798?e=${email}&p=${password}`;
-  // Only the login link subdomain follows request Origin (www vs go).
-  const loginHost = originVariant === "go" ? "go.english21days.co.il" : "www.english21days.co.il";
+  // Both the primary link and login link subdomain follow request Origin (www vs go).
+  const host = originVariant === "go" ? "go.english21days.co.il" : "www.english21days.co.il";
+  const link = `https://${host}/thank-you1691248976798?e=${email}&p=${password}`;
   const loginLink =
-    `https://${loginHost}/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1`;
+    `https://${host}/login33523348?page_id=33523349&page_key=xoy7nhsch7g0292f&login_redirect=1`;
 
   const msg = {
     to: email,
